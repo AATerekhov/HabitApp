@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import usersReducer from "../modules/usersSlice";
+import apiSliceReducer from "../modules/apiButtons";
 
 const store = configureStore({
   reducer: {
-    usersRepository: usersReducer,
-  },
+    apiSlice: apiSliceReducer
+  }
 });
 
 export default store;

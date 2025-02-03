@@ -12,7 +12,7 @@ const NavbarComponent = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="login">Login</Nav.Link>
+          <Nav.Link href="rooms">Rooms</Nav.Link>
           <Nav.Link href="register">Register</Nav.Link>
         </Nav>
         <div className="navbar-text mx-1" title="Authentication Context Class Reference">

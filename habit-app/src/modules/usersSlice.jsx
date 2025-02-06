@@ -1,3 +1,4 @@
+//usersSlice.jsx - файл из домашней работы не используется.
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
@@ -5,6 +6,9 @@ const initialState = {
     login: null
   };
 
+/**
+ * @deprecated The method from homework
+ */
 const usersSlice = createSlice({
     name: 'users',
     initialState,

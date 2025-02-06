@@ -4,7 +4,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './app/Store'
 import App from './App.jsx'
-import UserService from "./services/UserService";
+import userManager from './services/authConfig.jsx';
+
+userManager.getUser().then((user) => {
+  if (user && !user.expired) {
+    console.log('User is already authenticated:', user);
+  } else {
+    console.log('User is not authenticated');
+  }
+});
 
 const renderApp = () => createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -15,5 +23,5 @@ const renderApp = () => createRoot(document.getElementById('root')).render(
     </Provider> 
   </BrowserRouter>,
 )
-
-UserService.initKeycloak(renderApp);
+renderApp();
+// UserService.initKeycloak(renderApp);

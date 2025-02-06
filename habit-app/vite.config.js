@@ -10,6 +10,6 @@ export default defineConfig({
       usePolling: true
     },
     open: false,
-    port: 3001,
+    port: 4200,
   }
 })

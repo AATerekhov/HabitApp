@@ -1,6 +1,6 @@
 //import Navbar from './components/NavbarIS';
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {  Route, Routes } from 'react-router-dom'
 import SigninOidc from './pages/signin-oidc'
 import SignoutOidc from './pages/signout-oidc'
 import Home from './pages/home'
@@ -12,6 +12,7 @@ import AuthProvider from './utils/authProvider'
 import NotFound from "./components/NotFound";
 import ProtectedRoute from './utils/protectedRoute'
 import './App.css'
+import Navbar from './components/NavbarIS';
 
 function App() {
   
@@ -21,9 +22,9 @@ function App() {
   }, [])
 
   return (    
-    <Provider store={store}>
-      <AuthProvider userManager={userManager} store={store}>        
-        <Router>
+  <AuthProvider userManager={userManager} store={store}> 
+    <Provider store={store}>  
+        <Navbar /> 
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signout-oidc" element={<SignoutOidc />} />
@@ -34,10 +35,9 @@ function App() {
                 <Home />
               </ProtectedRoute>          
             } />
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </Provider>
+          </Routes>  
+      </Provider>
+    </AuthProvider>
   )
 }
 

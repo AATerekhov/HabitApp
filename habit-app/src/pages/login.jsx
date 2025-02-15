@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function Login() {
-  const user = useSelector(state => state.auth.user)
+  const user = useSelector((state) => state.auth.user)
 
   function login() {
     signinRedirect()

@@ -5,7 +5,7 @@ import * as apiService from '../services/apiService'
 import { prettifyJson } from '../utils/jsonUtils'
 
 function Home() {
-  const user = useSelector(state => state.auth.user)
+  const user = useSelector((state) => state.auth.user)
   const [doughnutData, setDoughnutData] = useState(null)
   function signOut() {
     signoutRedirect()

@@ -1,17 +1,21 @@
 import React, { useEffect, useRef } from 'react';
-import { storeUser } from '../actions/authActions'
+// import { storeUser } from '../actions/authActions';
+import { storeUser } from '../reducers/userSlice';
 import { setAuthHeader } from './axiosHeaders';
 
-export default function AuthProvider({ userManager: manager, store, children }) {
+import { useDispatch } from 'react-redux';
+
+export default function AuthProvider({ userManager: manager, children }) {
 
   let userManager = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     userManager.current = manager
 
-    const onUserLoaded = (user) => {
+    const onUserLoaded = (user) => {    
       console.log(`user loaded: ${user}`)
-      store.dispatch(storeUser(user))
+      dispatch(storeUser(user))
     }
 
     const onUserUnloaded = () => {
@@ -46,9 +50,7 @@ export default function AuthProvider({ userManager: manager, store, children }) 
       userManager.current.events.removeAccessTokenExpired(onAccessTokenExpired)
       userManager.current.events.removeUserSignedOut(onUserSignedOut)
     };
-  }, [manager, store]);
+  }, [manager, dispatch]);
 
-  return (
-    React.Children.only(children)
-  )
+  return (children);
 }

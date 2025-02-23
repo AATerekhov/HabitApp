@@ -1,25 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { setAuthHeader } from '../utils/axiosHeaders'
 
-const initialState = {
-    user: null,
-    isLoadingUser: false
-  };
 
 const userSlice = createSlice({
     name: 'auth',
-    initialState,
+    initialState:{
+        user: null,
+        isLoadingUser: false,
+        error: null,
+    },
     reducers: {
-        userExpired: (state) => {                                            
+        userExpired: (state) => {  
+            //Добавить логику refresh token.
+            //Действие в случае истекания действия токена.                                          
         },
-        storeUserError: (state) => {                                            
+        storeUserError: (state, action) => { 
+            state.error = action.payload;                                           
         },
         userSignedOut: (state) => {    
             state.user = null;
             state.isLoadingUser = false;                                           
         },
         storeUser: (state, action) => {
-            setAuthHeader(action.payload.access_token)
+            
             state.user = action.payload;
             state.isLoadingUser = false;
         },
@@ -30,4 +32,5 @@ const userSlice = createSlice({
 });
 
 export const {userExpired, storeUserError, userSignedOut, storeUser, loadingUser } = userSlice.actions;
+
 export default userSlice.reducer;

@@ -1,0 +1,27 @@
+.footer {
+    padding: 0px;
+    /* background-color: #f1f1f1; Цвет фона футера */
+}
+
+.footer-line {
+    border: none; /* Убираем стандартные стили границы */
+    height: 1px; /* Высота линии */
+    background-color: #ccc; /* Цвет линии */
+    margin: 0px 0; /* Отступы сверху и снизу */
+}
+
+.footer-content {
+    display: flex; /* Используем Flexbox для выравнивания */
+    justify-content: space-between; /* Размещаем элементы по краям */
+    align-items: center; /* Выравнивание по центру по вертикали */
+}
+
+.footer-logo {
+    width: 40px; /* Ширина картинки */
+    height: auto; /* Автоматическая высота */
+}
+
+.footer-text {
+    font-size: 14px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+}

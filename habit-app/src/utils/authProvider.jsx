@@ -13,9 +13,10 @@ export default function AuthProvider({ userManager: manager, children }) {
   useEffect(() => {
     userManager.current = manager
 
-    const onUserLoaded = (user) => {    
-      console.log(`user loaded: ${user}`)
-      dispatch(storeUser(user))
+    const onUserLoaded = (user) => { 
+      setAuthHeader(user.access_token)
+      console.log(`user loaded: ${user.profile.given_name}`)
+      dispatch(storeUser(user.profile.given_name))
     }
 
     const onUserUnloaded = () => {

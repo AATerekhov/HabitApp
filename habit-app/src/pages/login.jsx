@@ -1,11 +1,10 @@
 import React from 'react'
 import { signinRedirect } from '../services/userService'
 import { Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Login() {
   const user = useSelector((state) => state.auth.user)
-
   function login() {
     signinRedirect()
   }

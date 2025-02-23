@@ -19,7 +19,7 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
-      <p>Hello, {user.profile.given_name}.</p>
+      <p>Hello, {user}</p>
       <p>I have given you a token to call your favourite doughnut based API 🍩</p>
 
       <p>💡 <strong>Tip: </strong><em>Use the Redux dev tools and network tab to inspect what user data was returned from identity and stored in the client.</em></p>

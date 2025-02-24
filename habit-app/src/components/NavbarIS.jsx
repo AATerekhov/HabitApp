@@ -13,6 +13,7 @@ const NavbarComponent = () => {
         <Nav className="me-auto">
           <Nav.Link href="rooms">Rooms</Nav.Link>
           <Nav.Link href="register">Register</Nav.Link>
+          <Nav.Link href="diaries">Diaries</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

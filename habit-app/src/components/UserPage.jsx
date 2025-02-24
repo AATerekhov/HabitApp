@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import { postData } from "../modules/apiSlice";
-=======
 import { postData } from "../modules/apiButtons";
->>>>>>> origin/develop
 import { Container, Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

@@ -38,7 +38,7 @@ const NavbarComponent = () => {
               Signed in as <b>{user}</b>
             </div>}
             {!user && <button  onClick={handleLogin} className="button button-outline mt-2">Login</button>}
-            {user && <button  onClick={handleLogout} className="button button-clear mt-2">Logout</button>}         
+            {user && <button  onClick={handleLogout} className="button button-clear mt-2">Sign out</button>}         
         </Nav>
       </Navbar.Collapse>
     </Container>

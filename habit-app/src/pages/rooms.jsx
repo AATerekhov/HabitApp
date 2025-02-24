@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { signoutRedirect } from '../services/userService'
-import * as apiService from '../services/apiService'
-import { prettifyJson } from '../utils/jsonUtils'
+import * as apiService from '../services/casesService'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './rooms.css';
 
@@ -18,7 +17,12 @@ function Rooms() {
 
   const addItem = () => {
     if (!currentItem.name) return;
-    setItems([...items, { id: Date.now(), name: currentItem.name }]);
+    async function AddCase() {
+        const room = await apiService.addRoomFromApi(currentItem.name);     
+        setItems([...items, room]);
+      }
+          
+    AddCase();
     setCurrentItem({ id: null, name: '' });
   };
 
@@ -28,13 +32,27 @@ function Rooms() {
   };
 
   const updateItem = () => {
-    setItems(items.map(item => (item.id === currentItem.id ? currentItem : item)));
-    setCurrentItem({ id: null, name: '' });
+    async function UpdateCase() {
+        return await apiService.updateRoomFromApi(currentItem.name, currentItem.id);  
+    }
+    let result = UpdateCase();
+    if(result){
+        setItems(items.map(item => (item.id === currentItem.id ? currentItem : item)));
+        setCurrentItem({ id: null, name: '' });
+    }
     setIsEditing(false);
   };
 
   const deleteItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
+
+    async function DeleteCase() {
+        return await apiService.deleteRoomFromApi(id);  
+      }
+
+    let result = DeleteCase();
+    if(result){
+        setItems(items.filter(item => item.id !== id));
+    }
   };
 
   useEffect(() => {
@@ -59,7 +77,7 @@ function Rooms() {
           className="input"
         />
         {isEditing ? (
-          <button onClick={updateItem} className="button">Update Item</button>
+          <button onClick={updateItem} className="button"><i className="fa fa-check fa-lg" aria-hidden="true"></i></button>
         ) : (
           <button onClick={addItem} className="button"><i className="fa fa-plus fa-lg" aria-hidden="true"></i></button>
         )}

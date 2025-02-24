@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { signoutRedirect } from '../services/userService'
 import { useSelector } from 'react-redux'
-import * as apiService from '../services/apiService'
+import * as apiService from '../services/casesService'
 import { prettifyJson } from '../utils/jsonUtils'
 
 function Home() {

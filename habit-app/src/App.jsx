@@ -1,4 +1,3 @@
-//import Navbar from './components/NavbarIS';
 import React, { lazy, Suspense } from 'react';
 import {  Route, Routes } from 'react-router-dom'
 import SigninOidc from './pages/signin-oidc'
@@ -14,14 +13,12 @@ import ProtectedRoute from './utils/protectedRoute'
 import './App.css'
 import Navbar from './components/NavbarIS';
 import Footer from './components/Footer';
-// import Rooms from  './pages/rooms';
 
 const LazyLoadedComponent = lazy(() => import('./pages/rooms'));
 
 function App() {  
 
-  return (    
-  
+  return (      
     <Provider store={store}>  
       <AuthProvider userManager={userManager}>      
         <Navbar /> 

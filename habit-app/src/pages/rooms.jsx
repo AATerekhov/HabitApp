@@ -3,9 +3,10 @@ import { signoutRedirect } from '../services/userService'
 import * as apiService from '../services/casesService'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './rooms.css';
+import { useNavigate } from 'react-router-dom';
 
 function Rooms() {
-
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [currentItem, setCurrentItem] = useState({ id: null, name: '' });
   const [isEditing, setIsEditing] = useState(false);
@@ -29,6 +30,10 @@ function Rooms() {
   const editItem = (item) => {
     setIsEditing(true);
     setCurrentItem(item);
+  };
+  
+  const showDetail = (id) => {
+    navigate(`/rooms/${id}`);
   };
 
   const updateItem = () => {
@@ -93,7 +98,10 @@ function Rooms() {
          <tbody>
             {items.map(item => (
                <tr key={item.id}>
-                 <td>{item.name}</td>
+                 <td>
+                   <button className='button button-clear' onClick={() => showDetail(item.id)}><i className="fa fa-users fa-2x"></i></button>    
+                   {item.name}                
+                 </td>
                  <td>
                  <div className="button-group">
                    <button className='button button-outline' onClick={() => editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>

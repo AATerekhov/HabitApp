@@ -13,6 +13,8 @@ import ProtectedRoute from './utils/protectedRoute'
 import './App.css'
 import Navbar from './components/NavbarIS';
 import Footer from './components/Footer';
+import RoomsDetail from './pages/roomsDetail';
+
 
 const LazyLoadedComponent = lazy(() => import('./pages/rooms'));
 
@@ -30,6 +32,7 @@ function App() {
             <Suspense fallback={<div>Загрузка...</div>}>
               <LazyLoadedComponent />
             </Suspense>} />
+          <Route path="/rooms/:id" element={<RoomsDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={
             <ProtectedRoute>

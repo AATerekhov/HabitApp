@@ -5,7 +5,7 @@ const config = {
   client_id: "wewantdoughnuts",
   redirect_uri: `${import.meta.env.VITE_APP_URL}/signin-oidc`,
   response_type: "id_token token",
-  scope: "openid profile doughnutapi",
+  scope: "openid profile email doughnutapi",
   post_logout_redirect_uri: `${import.meta.env.VITE_APP_URL}/signout-oidc`,
 };
 

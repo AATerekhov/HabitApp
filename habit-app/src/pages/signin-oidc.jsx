@@ -12,7 +12,7 @@ function SigninOidc() {
   useEffect(() => {
     async function signinAsync() {
       await userManager.signinRedirectCallback().then((user) => {
-        dispatch(storeUser(user.profile.email));
+        dispatch(storeUser(user.profile.given_name));
       }).catch((error) => {
         console.error(error);
       });

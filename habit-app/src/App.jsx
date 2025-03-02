@@ -14,6 +14,8 @@ import './App.css'
 import Navbar from './components/NavbarIS';
 import Footer from './components/Footer';
 import RoomsDetail from './pages/roomsDetail';
+import Confirmations from './pages/confirmations';
+import Administration from './pages/administration';
 
 
 const LazyLoadedComponent = lazy(() => import('./pages/rooms'));
@@ -28,10 +30,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signout-oidc" element={<SignoutOidc />} />
           <Route path="/signin-oidc" element={<SigninOidc />} />
-          <Route path="/rooms" element={      
-            <Suspense fallback={<div>Загрузка...</div>}>
-              <LazyLoadedComponent />
-            </Suspense>} />
+          <Route path="/rooms" element={   
+            <ProtectedRoute>  
+              <Suspense fallback={<div>Загрузка...</div>}>
+                <LazyLoadedComponent />
+              </Suspense>
+            </ProtectedRoute> } >            
+              <Route index element={<Administration />} />
+              <Route path="confirmations" element={<Confirmations />} />
+            </Route>            
           <Route path="/rooms/:id" element={<RoomsDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={

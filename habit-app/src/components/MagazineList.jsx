@@ -1,19 +1,21 @@
+import React from 'react';
 import BaseList from "./BaseList";
 
-export default function DiaryList2() {
+export default function MagazineList() {
   return (
     <BaseList
-      title="Diaries"
-      apiUrl="/api/HabitDiary/AllDiaries"
-      entityName="Diary"
-      editPath="/admin/diary/edit"
+      title="Reward magazines"
+      apiUrl="/api/RewardMagazine/AllMagazines"
+      entityName="Magazine"
+      editPath="/admin/magazine/edit"
       columns={[
         { key: "id", label: "Id" },
         { key: "roomId", label: "RoomId" },
         { key: "description", label: "Description" },
-        { key: "diaryOwnerId", label: "DiaryOwnerId" },
+        { key: "magazineOwnerId", label: "MagazineOwnerId" },
         { key: "totalCost", label: "TotalCost" },
       ]}
     />
   );
 }
+

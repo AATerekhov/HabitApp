@@ -1,29 +1,29 @@
 import BaseDetails from "./BaseDetails";
 
-export default function DiaryDetails() {
+export default function MagazineDetails() {
     return (
         <BaseDetails
-            title="Diary Details"
-            apiUrl="/api/HabitDiary/GetDiary"
+            title="Magazine Details"
+            apiUrl="/api/RewardMagazine/GetMagazine"
             entityFields={[
                 { label: "Id", key: "id" },
                 { label: "RoomId", key: "roomId" },
                 { label: "Description", key: "description" },
-                { label: "DiaryOwnerId", key: "diaryOwnerId" },
+                { label: "MagazineOwnerId", key: "magazineOwnerId" },
                 { label: "TotalCost", key: "totalCost" }
             ]}
             subEntityConfig={{
-                title: "Diary Lines",
-                apiUrl: "/api/HabitDiaryLine/GetDiaryLinesByDiaryId",
+                title: "Magazine Lines",
+                apiUrl: "/api/RewardMagazineLine/GetMagazineLinesByMagazineId",
                 columns: [
                     { label: "Id", key: "id" },
-                    { label: "EntityId", key: "entityId" },
-                    { label: "EntityType", key: "entityType" },
+                    { label: "RewardId", key: "rewardId" },
                     { label: "EventDescription", key: "eventDescription" },
                     { label: "ModifiedDate", key: "modifiedDate" },
-                    { label: "Status", key: "status" },
                     { label: "Cost", key: "cost" },
+                    { label: "ModifiedDate", key: "modifiedDate" }
                 ]
             }}
         />
     )}
+

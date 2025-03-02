@@ -14,6 +14,7 @@ const NavbarComponent = () => {
           <Nav.Link href="rooms">Rooms</Nav.Link>
           <Nav.Link href="register">Register</Nav.Link>
           <Nav.Link href="diaries">Diaries</Nav.Link>
+          <Nav.Link href="magazines">Magazines</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Container>

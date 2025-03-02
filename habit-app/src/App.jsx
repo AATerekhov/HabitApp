@@ -13,6 +13,8 @@ import NotFound from "./components/NotFound";
 import ProtectedRoute from './utils/protectedRoute'
 import DiaryList from './components/DiaryList';
 import DiaryDetails from './components/DiaryDetails';
+import MagazineList from './components/MagazineList';
+import MagazineDetails from './components/MagazineDetails';
 import './App.css'
 import Navbar from './components/NavbarIS';
 
@@ -34,6 +36,8 @@ function App() {
           <Route path="/signin-oidc" element={<SigninOidc />} />
           <Route path="/diaries" element={<DiaryList />} />
           <Route path="/diary/:id" element={<DiaryDetails />} />
+          <Route path="/magazines" element={<MagazineList />} />
+          <Route path="/magazine/:id" element={<MagazineDetails />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={
             <ProtectedRoute>

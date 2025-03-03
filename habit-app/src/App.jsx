@@ -16,6 +16,9 @@ import Footer from './components/Footer';
 import RoomsDetail from './pages/roomsDetail';
 import Confirmations from './pages/confirmations';
 import Administration from './pages/administration';
+import RoomsAdmin from './pages/roomsAdmin';
+import AdminHabits from './pages/adminHabits';
+import AdminRewords from './pages/adminRewords';
 
 
 const LazyLoadedComponent = lazy(() => import('./pages/rooms'));
@@ -39,7 +42,11 @@ function App() {
               <Route index element={<Administration />} />
               <Route path="confirmations" element={<Confirmations />} />
             </Route>            
-          <Route path="/rooms/:id" element={<RoomsDetail />} />
+          <Route path="/rooms/:id" element={<RoomsAdmin />}>          
+              <Route index element={<RoomsDetail />} />
+              <Route path="rewords" element={<AdminRewords />} />
+              <Route path="habits" element={<AdminHabits />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={
             <ProtectedRoute>

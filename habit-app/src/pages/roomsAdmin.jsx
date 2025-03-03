@@ -1,8 +1,11 @@
 import React from 'react'
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useParams } from "react-router-dom";
 import './rooms.css';
 
 const Rooms = () => {
+    //TODO: Передача id для обработки в Slice adminRoom.
+  const { id } = useParams();  
+
   return (
     <div className="user">
       <nav className="user-menu">
@@ -15,17 +18,27 @@ const Rooms = () => {
               }}
               end
             >
-              Administration
+              Participants
             </NavLink>
           </li>
           <li>
             <NavLink
-              to={"confirmations"}
+              to={"rewords"}
               className={({ isActive }) => {
                 return isActive ? "active-route" : "";
               }}
             >
-              Confirmations
+              Rewords
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to={"habits"}
+              className={({ isActive }) => {
+                return isActive ? "active-route" : "";
+              }}
+            >
+              Habits
             </NavLink>
           </li>
         </ul>

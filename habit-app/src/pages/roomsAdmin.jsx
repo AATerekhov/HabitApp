@@ -1,10 +1,8 @@
 import React from 'react'
-import { Outlet, NavLink, useParams } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import './rooms.css';
 
-const Rooms = () => {
-    //TODO: Передача id для обработки в Slice adminRoom.
-  const { id } = useParams();  
+const Rooms = () => {  
 
   return (
     <div className="user">

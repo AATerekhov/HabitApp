@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as apiService from '../services/casesService'
-import * as participantsApiService from '../services/participantsService'
+import {  storeRoom } from '../reducers/adminSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+
+import * as apiService from '../services/casesService';
+import * as participantsApiService from '../services/participantsService';
 
 function RoomDetail() {
+  const selectRoom = useSelector(state => state.admin.room);
+  const dispatch = useDispatch();
   const { id } = useParams();  
-  const [selectRoom, setSelectRoom] = useState({ name: '' });
   const [roomPlayers, setRoomPlayers] = useState([]);  
   const [currentPlayer, setCurrentPlayer] = useState({ id: null, usermail: '', isConfirm: false });
 
@@ -41,7 +46,7 @@ function RoomDetail() {
   useEffect(() => {
     async function getRoom(id) {
         const room = await apiService.getRoomFoIdFromApi(id);
-        setSelectRoom(room);
+        dispatch(storeRoom(room));
         setRoomPlayers(room.players);
       }
 
@@ -50,7 +55,7 @@ function RoomDetail() {
 
   return (
     <div className="container">
-      <h2>Room's Participants "{selectRoom.name}" 🏇</h2>  
+      <h2>Room's Participants "{selectRoom?selectRoom.name:''}" 🏇</h2>  
       <div className="input-group">
         <input
           type="email"

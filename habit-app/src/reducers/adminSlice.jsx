@@ -17,7 +17,7 @@ const adminSlice = createSlice({
         },
         storeRoom: (state, action) => {
             
-            state.user = action.payload;
+            state.room = action.payload;
             state.isLoadingRoom = false;
         },
         loadingRoom: (state) => {

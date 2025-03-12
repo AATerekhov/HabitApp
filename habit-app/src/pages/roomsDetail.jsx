@@ -31,14 +31,14 @@ function RoomDetail() {
     setCurrentPlayer({ id: null, usermail: '' });
   };
 
- const deletePlayer = (id) => {
+ const deletePlayer = async (id) => {
 
     async function DeleteCase() {
         return await participantsApiService.deleteParticipantFromApi(id);  
       }
 
-    let result = DeleteCase();
-    if(result){
+    let result = await DeleteCase();
+    if(result === true){
       setRoomPlayers(roomPlayers.filter(item => item.id !== id));
     }
   };

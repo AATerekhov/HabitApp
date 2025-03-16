@@ -1,0 +1,68 @@
+.button-group {
+    display: flex; /* Используем flexbox для выравнивания кнопок */
+    gap: 10px; /* Отступ между кнопками */
+  }
+  
+  .input-group {
+    display: flex;
+     /* Выравнивание по центру по вертикали */
+  }
+
+  .input {
+    flex: 1; /* Занять оставшееся пространство */
+    margin-right: 0px; /* Отступ между полем ввода и кнопкой */
+  }
+  
+  .button {
+    margin: 0; /* Удалите отступы */
+  }
+
+  .shelf {
+    display: flex;
+    justify-content: space-around; /* Распределяет секции по горизонтали */
+    padding: 20px; /* Отступы вокруг контейнера */
+  }
+  
+  .section {
+    flex: 1; /* Каждая секция занимает равное пространство */
+    margin: 0 10px; /* Отступы между секциями */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #f0f0f0; /* Цвет фона секций */
+    border: 1px solid #ccc; /* Граница секций */
+    text-align: center; /* Выравнивание текста по центру */
+  }
+  
+  .section1 {
+    background-color: #ffdddd; /* Цвет фона для первой секции */
+  }
+  
+  .section2 {
+    background-color: #ddffdd; /* Цвет фона для второй секции */
+  }
+  
+  .section3 {
+    background-color: #ddddff; /* Цвет фона для третьей секции */
+  }
+
+  .card {
+    width: 250px; /* Фиксированная ширина для каждой карточки */
+    padding: 15px; /* Внутренние отступы */
+    background-color: #f7f7f7; /* Цвет фона карточек */
+    border: 1px solid #ccc; /* Граница карточек */
+    text-align: center; /* Выравнивание текста по центру */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для карточек */
+    margin: 0 10px; /* Отступы между карточками */
+  }
+
+  .row-button {
+    height: 40px; /* Фиксированная высота для каждой строки */
+    display: flex; /* Используем Flexbox для выравнивания содержимого */
+    justify-content: center; /* Горизонтальное выравнивание по центру */
+  }
+
+  .row {
+    height: 40px; /* Фиксированная высота для каждой строки */
+    display: flex; /* Используем Flexbox для выравнивания содержимого */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    justify-content: center; /* Горизонтальное выравнивание по центру */
+  }

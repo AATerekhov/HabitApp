@@ -21,8 +21,13 @@ async function deleteCardFromApi(id) {
 }
 
 async function updateCardFromApi(updateModel) {
-  const response = await axios.put(`${import.meta.env.VITE_API_URL}/Cards`, updateModel);
-  return response.data;
+  const templateResponse = await axios.put(`${import.meta.env.VITE_API_URL}/Cards/${updateModel.templateValues.id}`, updateModel.templateValues);
+  if (templateResponse.data){
+    const response = await axios.put(`${import.meta.env.VITE_API_URL}/Cards`, updateModel);
+    return response.data;
+  }else{
+    return templateResponse.data;
+  }
 }
 
 export {

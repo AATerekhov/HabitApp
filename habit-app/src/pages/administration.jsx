@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import * as apiService from '../services/casesService'
+import * as habitApiService from '../services/habitsService'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './administration.css';
 import { useNavigate } from 'react-router-dom';
+import { storeAdmin, storeRoom, storePerson } from '../reducers/adminSlice';
+import { useDispatch } from 'react-redux';
 
 function Administration() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [items, setItems] = useState([]);
   const [currentItem, setCurrentItem] = useState({ id: null, name: '' });
   const [isEditing, setIsEditing] = useState(false);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCurrentItem({ ...currentItem, [name]: value });
@@ -55,7 +59,11 @@ function Administration() {
     }
   };
   
-  const showDetail = (id) => {
+  const showDetail = async (id) => {    
+    const room = await habitApiService.getRoomDetailFromApi(id);
+    dispatch(storeRoom(room));
+    dispatch(storePerson(room.manager));
+    dispatch(storeAdmin(true));
     navigate(`/rooms/${id}`);
   };
 
@@ -86,7 +94,6 @@ function Administration() {
           <button onClick={addItem} className="button"><i className="fa fa-plus fa-lg" aria-hidden="true"></i></button>
         )}
       </div>
-
       <table className="u-full-width">
          <thead>
            <tr>
@@ -95,20 +102,26 @@ function Administration() {
            </tr>
          </thead>
          <tbody>
-            {items.map(item => (
-               <tr key={item.id}>
-                 <td>
-                   <button className='button button-clear' onClick={() => showDetail(item.id)}><i className="fa fa-users fa-2x"></i></button>    
-                   {item.name}                
-                 </td>
-                 <td>
-                 <div className="button-group">
-                   <button className='button button-outline' onClick={() => editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>
-                   <button className='button button-outline' onClick={() => deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>
-                 </div>
-                 </td>
-               </tr>
-            ))}
+          {items.length === 0 ? (
+             <tr>
+               <td colSpan="3" className="text-center text-muted">
+                 No room added yet
+               </td>
+             </tr>
+           ) : (items.map(item => (
+             <tr key={item.id}>
+               <td>
+                 <button className='button button-clear' onClick={() => showDetail(item.id)}><i className="fa fa-users fa-2x"></i></button>    
+                 {item.name}                
+               </td>
+               <td>
+               <div className="button-group">
+                 <button className='button button-outline' onClick={() => editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>
+                 <button className='button button-outline' onClick={() => deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>
+               </div>
+               </td>
+             </tr>
+          )))}            
          </tbody>
         </table>
     </div>

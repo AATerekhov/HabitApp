@@ -63,6 +63,7 @@
     text-align: center; /* Выравнивание текста по центру */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для карточек */
     margin: 0 10px; /* Отступы между карточками */
+    margin-bottom: 10px; /* Отступ между карточками по вертикали */
     border-radius: 10px; /* Скругленные края */
   }
 
@@ -82,6 +83,7 @@
 
   .card-grid {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between; /* Распределяем колонки по ширине */
   }
   
@@ -90,8 +92,6 @@
     margin: 0 10px; /* Отступы между колонками */
   }
 
-  .divider {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 5px 0;
+  .maincard:first-child {
+    margin-top: 10px; /* Отступ сверху для первой карточки */
   }

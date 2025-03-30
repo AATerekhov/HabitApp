@@ -7,7 +7,7 @@ const Footer = () => {
         <hr className="footer-line" />
         <div className="footer-content">
             <img src="/basket.png" alt="Логотип" className="footer-logo"/>            
-            <p>© 2025 Habit tracker. Учебный проект Otus.</p>
+            <p>© 2025 Habits tracker. Учебный проект Otus.</p>
         </div>
     </footer>
     )

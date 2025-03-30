@@ -1,0 +1,45 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 5px;
+  }  
+  .gridvalue {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5px;
+  } 
+
+  .grideffect {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 5px;
+  }   
+  
+  .minimalcard {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 5px;
+  } 
+
+  .inputcaoinscard {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    gap: 5px;
+  } 
+  
+  .standard {
+    text-align: center;
+  }
+
+  .cell {
+    text-align: center;
+  }
+
+  .namecell{
+    text-align: center;
+  }
+  
+  .controlscell {
+    display: flex;
+    justify-content: flex-start; 
+  }

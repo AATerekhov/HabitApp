@@ -25,22 +25,28 @@ const CardTable = ({  initialItems, onChangeEditItem, onChangeDeleteItem }) => {
         </tr>
       </thead>
       <tbody>
-        {items.map(item => (
-           <tr key={item.id}>
-             <td> 
-               {item.name}                
-             </td>
-             <td> 
-               {item.description}                
-             </td>
-             <td>
-             <div className="button-group">
-               <button className='button button-outline' onClick={async () => await editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>
-               <button className='button button-outline' onClick={async () => await deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>
-             </div>
-             </td>
-           </tr>
-        ))}
+      {items.length === 0 ? (
+          <tr>
+            <td colSpan="3" className="text-center text-muted">
+              No cards added yet
+            </td>
+          </tr>
+        ) : (items.map(item => (
+          <tr key={item.id}>
+            <td> 
+              {item.name}                
+            </td>
+            <td> 
+              {item.description}                
+            </td>
+            <td>
+            <div className="button-group">
+              <button className='button button-outline' onClick={async () => await editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>
+              <button className='button button-outline' onClick={async () => await deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>
+            </div>
+            </td>
+          </tr>
+       )))}
       </tbody>
     </table> 
   );

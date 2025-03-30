@@ -4,8 +4,9 @@ import * as habitApiService from '../services/habitsService'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './administration.css';
 import { useNavigate } from 'react-router-dom';
-import { storeAdmin, storeRoom, storePerson } from '../reducers/adminSlice';
+import { storeAdmin, storeRoom, storePerson , storeRoomError, storeCaseHabits} from '../reducers/adminSlice';
 import { useDispatch } from 'react-redux';
+import { isDraft } from '@reduxjs/toolkit';
 
 function Administration() {
   const navigate = useNavigate();
@@ -60,11 +61,26 @@ function Administration() {
   };
   
   const showDetail = async (id) => {    
-    const room = await habitApiService.getRoomDetailFromApi(id);
+    try{
+      const caseHabits = await habitApiService.getRoomDetailFromApi(id);
+      dispatch(storeCaseHabits(caseHabits));
+      dispatch(storePerson(caseHabits.manager));
+    } catch {
+      dispatch(storeRoomError(true));
+    }
+    const room = await apiService.getRoomFoIdFromApi(id);
     dispatch(storeRoom(room));
-    dispatch(storePerson(room.manager));
     dispatch(storeAdmin(true));
     navigate(`/rooms/${id}`);
+  };
+
+
+  const handleStartRoomChange = async () => {
+    async function StartRoom() {
+
+      }
+          
+    await StartRoom();
   };
 
   useEffect(() => {
@@ -117,7 +133,8 @@ function Administration() {
                <td>
                <div className="button-group">
                  <button className='button button-outline' onClick={() => editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>
-                 <button className='button button-outline' onClick={() => deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>
+                 <button className='button button-outline' onClick={() => deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>                 
+                {(!item.isActive) && (<button className='button button-outline' onClick={async () => await handleStartRoomChange()}> <i className="fa fa-gamepad fa-lg"></i></button>)} 
                </div>
                </td>
              </tr>

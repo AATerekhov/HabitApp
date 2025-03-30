@@ -4,6 +4,7 @@ const adminSlice = createSlice({
     name: 'admin',
     initialState:{
         room: null,
+        caseHabits: null,
         isAdmin: false,
         person: null,
         isLoadingRoom: false,
@@ -27,12 +28,15 @@ const adminSlice = createSlice({
         storeAdmin: (state, action) => {            
             state.isAdmin = action.payload;
         },
+        storeCaseHabits: (state, action) => {
+            state.caseHabits = action.payload;
+        },
         loadingRoom: (state) => {
             state.isLoadingRoom = true;
         },
     }
 });
 
-export const {storeRoomError, roomLeave, storeRoom, loadingRoom, storePerson, storeAdmin } = adminSlice.actions;
+export const {storeRoomError, roomLeave, storeRoom, loadingRoom, storePerson, storeAdmin, storeCaseHabits } = adminSlice.actions;
 
 export default adminSlice.reducer;

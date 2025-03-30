@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import * as participantsApiService from '../services/participantsService'
 import * as caseApiService from '../services/casesService'
+import * as habitApiService from '../services/habitsService';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { storePerson, storeRoom, storeAdmin } from '../reducers/adminSlice';
+import { storePerson, storeRoom, storeAdmin, storeCaseHabits, storeRoomError } from '../reducers/adminSlice';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './administration.css';
 
@@ -24,9 +25,18 @@ const Confirmations = () => {
     };
 
      const showDetail = async (item) => {
-        dispatch(storeRoom(await  caseApiService.getRoomFoIdFromApi(item.caseId)));
-        dispatch(storePerson(item));
-        dispatch(storeAdmin(false));
+
+
+        try{  
+          let room = await  caseApiService.getRoomFoIdFromApi(item.caseId);
+          dispatch(storeRoom(room));
+          dispatch(storePerson(item));
+          dispatch(storeAdmin(false));
+          dispatch(storeCaseHabits(room))
+          
+        } catch {         
+          dispatch(storeRoomError(true));
+        }
         navigate(`/rooms/${item.caseId}/habits`);
       };
 

@@ -18,7 +18,7 @@ function AdminHabits (){
   const [detailCard, setDetailCard] = useState(null);
   const [fullHabit, setFullHabit] = useState(null);
 
-  const selectRoom = useSelector(store => store.admin.room);  
+  const selectRoom = useSelector(store => store.admin.caseHabits);  
   const person = useSelector(store => store.admin.person);  
   const isAdmin = useSelector(store => store.admin.isAdmin);  
   

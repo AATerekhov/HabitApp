@@ -11,7 +11,7 @@ function AdminCoins (){
   const [items, setItems] = useState([]); //Доступные habits для добавления в coins
   const [coins, setCoins] = useState([]);
 
-  const selectRoom = useSelector(store => store.admin.room);  
+  const selectRoom = useSelector(store => store.admin.caseHabits);  
   const person = useSelector(store => store.admin.person);  
   const isAdmin = useSelector(store => store.admin.isAdmin);  
  
@@ -36,13 +36,6 @@ function AdminCoins (){
     }
   };
 
-  const handleStartRoomChange = async () => {
-    async function StartRoom() {
-
-      }
-          
-    await StartRoom();
-  };
 
   const handleAddItemChange = async (habitId, cost) => {
     async function AddCase() {
@@ -92,8 +85,7 @@ function AdminCoins (){
             </div>
             ))}
         </div>)}           
-        <CoinsTable initialItems={coins} onChangeDeleteItem={deleteItem}/>   
-        {(isAdmin && coins.length !== 0) && (<button className='button' onClick={async () => await handleStartRoomChange()}> <i className="fa fa-gamepad fa-lg"></i></button>)}    
+        <CoinsTable initialItems={coins} onChangeDeleteItem={deleteItem}/>      
     </div>      
   )  
 }

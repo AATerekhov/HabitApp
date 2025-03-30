@@ -31,14 +31,14 @@ function RoomDetail() {
     setCurrentPlayer({ id: null, usermail: '' });
   };
 
- const deletePlayer = (id) => {
+ const deletePlayer = async (id) => {
 
     async function DeleteCase() {
         return await participantsApiService.deleteParticipantFromApi(id);  
       }
 
-    let result = DeleteCase();
-    if(result){
+    let result = await DeleteCase();
+    if(result === true){
       setRoomPlayers(roomPlayers.filter(item => item.id !== id));
     }
   };
@@ -65,7 +65,7 @@ function RoomDetail() {
           placeholder="Enter item usermail"
           className="input"
         />
-       <button onClick={addPlayer} className="button"><i className="fa fa-plus fa-lg" aria-hidden="true"></i></button>
+       <button onClick={addPlayer} className="button"><i className="fa fa-user-plus fa-lg" aria-hidden="true"></i></button>
       </div>
       <table className="u-full-width">
          <thead>
@@ -76,22 +76,28 @@ function RoomDetail() {
            </tr>
          </thead>
          <tbody>
-            {roomPlayers.map(item => (
-               <tr key={item.id}>
-                 <td>   
-                   {item.isConfirm ? (<i className="fa fa-check-circle fa-lg"></i>) : (<i className="fa fa-exclamation-circle fa-lg"></i>)}   
-                   {" " + item.name}                
-                 </td>
-                 <td>    
-                   {item.userMail}                
-                 </td>
-                 <td>
-                 <div className="button-group">
-                   <button className='button button-outline' onClick={() => deletePlayer(item.id)}> <i className="fas fa-trash fa-lg"></i></button> 
-                 </div>
-                 </td>
-               </tr>
-            ))}
+         {roomPlayers.length === 0 ? (
+             <tr>
+               <td colSpan="3" className="text-center text-muted">
+                 No participant added yet
+               </td>
+             </tr>
+            ) : (roomPlayers.map(item => (
+              <tr key={item.id}>
+                <td>   
+                  {item.isConfirm ? (<i className="fa fa-check-circle fa-lg"></i>) : (<i className="fa fa-exclamation-circle fa-lg"></i>)}   
+                  {" " + item.name}                
+                </td>
+                <td>    
+                  {item.userMail}                
+                </td>
+                <td>
+                <div className="button-group">
+                  <button className='button button-outline' onClick={() => deletePlayer(item.id)}> <i className="fas fa-trash fa-lg"></i></button> 
+                </div>
+                </td>
+              </tr>
+            )))}
          </tbody>
         </table>
     </div>

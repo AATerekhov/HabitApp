@@ -19,9 +19,11 @@ import Administration from './pages/administration';
 import RoomsAdmin from './pages/roomsAdmin';
 import AdminHabits from './pages/adminHabits';
 import AdminRewords from './pages/adminRewords';
+import AdminCoins from './pages/adminCoins';
 
 
-const LazyLoadedComponent = lazy(() => import('./pages/rooms'));
+const LazyLoadedRooms = lazy(() => import('./pages/rooms'));
+const LazyLoadedCards = lazy(() => import('./pages/cards'));
 
 function App() {  
 
@@ -36,7 +38,7 @@ function App() {
           <Route path="/rooms" element={   
             <ProtectedRoute>  
               <Suspense fallback={<div>Загрузка...</div>}>
-                <LazyLoadedComponent />
+                <LazyLoadedRooms />
               </Suspense>
             </ProtectedRoute> } >            
               <Route index element={<Administration />} />
@@ -46,6 +48,12 @@ function App() {
               <Route index element={<RoomsDetail />} />
               <Route path="rewords" element={<AdminRewords />} />
               <Route path="habits" element={<AdminHabits />} />
+              <Route path="coins" element={<AdminCoins />} />
+          </Route>
+          <Route path="/cards" element={   
+            <Suspense fallback={<div>Загрузка...</div>}>
+              <LazyLoadedCards />
+            </Suspense>}>
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={

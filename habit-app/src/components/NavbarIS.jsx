@@ -31,6 +31,7 @@ const NavbarComponent = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link as={Link} to="rooms">Rooms</Nav.Link>
+          <Nav.Link as={Link} to="cards">Cards</Nav.Link>
         </Nav>
         <Nav >
           {user&& <div className='mt-3'>

@@ -5,6 +5,7 @@ const userSlice = createSlice({
     name: 'auth',
     initialState:{
         user: null,
+        accessToken: null,
         isLoadingUser: false,
         error: null,
     },
@@ -25,12 +26,15 @@ const userSlice = createSlice({
             state.user = action.payload;
             state.isLoadingUser = false;
         },
+        storeAccessToken: (state, action) => {            
+            state.accessToken = action.payload;
+        },
         loadingUser: (state) => {
             state.isLoadingUser = true;
         },
     }
 });
 
-export const {userExpired, storeUserError, userSignedOut, storeUser, loadingUser } = userSlice.actions;
+export const {userExpired, storeUserError, userSignedOut, storeUser, loadingUser, storeAccessToken } = userSlice.actions;
 
 export default userSlice.reducer;

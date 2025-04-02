@@ -13,7 +13,7 @@ function SigninOidc() {
     async function signinAsync() {
       await userManager.signinRedirectCallback().then((user) => {
         dispatch(storeUser(user.profile.given_name));
-        dispatch(storeAccessToken(user ? 'Bearer ' + user.access_token: null));        
+        dispatch(storeAccessToken(user ? user.access_token: null));        
       }).catch((error) => {
         console.error(error);
       });

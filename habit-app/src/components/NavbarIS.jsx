@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { signinRedirect, signoutRedirect } from '../services/userService';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import Notification from '../pages/notifications/Notification';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
 

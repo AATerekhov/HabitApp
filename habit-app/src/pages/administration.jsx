@@ -6,7 +6,7 @@ import './administration.css';
 import { useNavigate } from 'react-router-dom';
 import { storeAdmin, storeRoom, storePerson , storeRoomError, storeCaseHabits} from '../reducers/adminSlice';
 import { useDispatch } from 'react-redux';
-import { isDraft } from '@reduxjs/toolkit';
+import  NotificationCustom  from '../pages/notifications/NotificationCustom';
 
 function Administration() {
   const navigate = useNavigate();
@@ -94,6 +94,7 @@ function Administration() {
 
   return (
     <div className="container">
+      <NotificationCustom />
       <h2>Your rooms for administration 👋</h2>
       <div className="input-group">
         <input

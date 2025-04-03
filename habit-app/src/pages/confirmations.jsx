@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import * as participantsApiService from '../services/participantsService'
 import * as caseApiService from '../services/casesService'
-import * as habitApiService from '../services/habitsService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { storePerson, storeRoom, storeAdmin, storeCaseHabits, storeRoomError } from '../reducers/adminSlice';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './administration.css';
+import useSignalR from '../pages/notifications/useSignalR';
 
-const Confirmations = () => {
+const Confirmations = () => {  
+  const userAccessToken = useSelector(store => store.auth.accessToken); 
+  const { connection } = useSignalR(`${import.meta.env.VITE_API_URL}/hubs/notification`, userAccessToken);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [items, setItems] = useState([]);
   const [updateParticipant, setUpdateParticipant] = useState({id: null, name: ''});
 
-    const updateItem = (id) => {
+
+    const updateItem = (item) => {
         async function UpdateParticipant() {
-            const participant = await participantsApiService.updateParticipantFromApi(id);  
+          try {
+            const participant = await participantsApiService.updateParticipantFromApi(item.id);
+            connection?.invoke("SendMessage", item.case.ownerId, `Принял приглашение в ${item.case.name}`)
             setUpdateParticipant(participant)
+          } catch (error) {
+            return;
+          }         
         }
 
-        UpdateParticipant();
-        
+        UpdateParticipant();        
     };
 
      const showDetail = async (item) => {
@@ -55,6 +62,28 @@ const Confirmations = () => {
           getItems();
       }, [])
 
+      useEffect(() => {
+        if (!connection) {
+          return
+        }
+        connection.on("AddParticipant", (message) => {   
+          try {
+            let newItem = JSON.parse(message);
+            if (newItem && newItem.id && newItem.case) {
+                setItems((prevItems) => [...prevItems, newItem]);
+            } else {
+                console.error("Received invalid participant data:", newItem);
+            }
+        } catch (error) {
+            console.error("Error parsing message:", error);
+        }
+        });
+      
+        return () => {
+          connection.off("AddParticipant")
+        }      
+      }, [connection])
+
     return (
         <div className="container"> 
             <h2>Your confirmations 🗿</h2>
@@ -83,7 +112,7 @@ const Confirmations = () => {
                   </td>
                   <td>
                   <div className="button-group">
-                    {(!item.isConfirm) && (<button className='button button-outline' onClick={() => updateItem(item.id)}> <i className="fa fa-check fa-lg"></i></button>) }
+                    {(!item.isConfirm) && (<button className='button button-outline' onClick={() => updateItem(item)}> <i className="fa fa-check fa-lg"></i></button>) }
                     {item.isConfirm && (<button className='button button-outline' onClick={async () => await showDetail(item)}><i className="fa fa-user fa-lg"></i></button>)}
                   </div>
                   </td>

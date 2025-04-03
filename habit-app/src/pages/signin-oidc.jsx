@@ -3,7 +3,7 @@ import { signinRedirectCallback } from '../services/userService'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import userManager from '../services/userService';
-import { storeUser  } from '../reducers/userSlice';
+import { storeUser, storeAccessToken  } from '../reducers/userSlice';
 
 function SigninOidc() {
   const navigate = useNavigate()
@@ -13,6 +13,7 @@ function SigninOidc() {
     async function signinAsync() {
       await userManager.signinRedirectCallback().then((user) => {
         dispatch(storeUser(user.profile.given_name));
+        dispatch(storeAccessToken(user ? user.access_token: null));        
       }).catch((error) => {
         console.error(error);
       });

@@ -8,6 +8,13 @@ export default defineConfig({
     // hmr:{
     //   overlay: false
     // },
+    proxy: {
+      "/api": "https://localhost:5002",
+      "/r": {
+        target: "https://localhost:5002",
+        ws: true,
+      },
+    },
     host: '0.0.0.0',
     watch: {
       usePolling: true

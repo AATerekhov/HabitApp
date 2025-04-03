@@ -6,7 +6,6 @@ import './administration.css';
 import { useNavigate } from 'react-router-dom';
 import { storeAdmin, storeRoom, storePerson , storeRoomError, storeCaseHabits} from '../reducers/adminSlice';
 import { useDispatch } from 'react-redux';
-import { isDraft } from '@reduxjs/toolkit';
 
 function Administration() {
   const navigate = useNavigate();

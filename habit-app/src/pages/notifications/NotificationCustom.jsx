@@ -3,7 +3,6 @@ import { HubConnectionBuilder, HttpTransportType  } from '@microsoft/signalr';
 import './Notification.css';
 import { useSelector } from 'react-redux';
 import useSignalR from './useSignalR';
-import { motion, AnimatePresence } from 'framer-motion';
 
 
 const NotificationCustom = () => {

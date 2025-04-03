@@ -22,8 +22,8 @@ const NavbarComponent = () => {
           <Nav.Link as={Link} to="rooms">Rooms</Nav.Link>
           <Nav.Link as={Link} to="cards">Cards</Nav.Link>
         </Nav>
-      </Navbar.Collapse>      
-      <Broadcaster /> 
+      </Navbar.Collapse> 
+      <Broadcaster />  
     </Container>
   </Navbar>
   );

@@ -5,13 +5,15 @@ import {
   LogLevel,
 } from "@microsoft/signalr";
 
-export default function useSignalR(url) {
+export default function useSignalR(url, access_token) {
   let [connection, setConnection] = useState(undefined);
 
   useEffect(() => {
     let canceled = false;
     const connection = new HubConnectionBuilder()
-      .withUrl(url)
+      .withUrl(url, {
+        accessTokenFactory: () => access_token, 
+      })
       .withAutomaticReconnect()
       .configureLogging(LogLevel.Information)
       .build();
@@ -56,7 +58,7 @@ export default function useSignalR(url) {
       canceled = true;
       connection.stop();
     };
-  }, []);
+  }, [url, access_token]);
 
   return { connection };
 }

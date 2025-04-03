@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {  storeRoom } from '../reducers/adminSlice';
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import useSignalR from '../pages/notifications/useSignalR';
 import * as apiService from '../services/casesService';
 import * as participantsApiService from '../services/participantsService';
 
 function RoomDetail() {
+  const userAccessToken = useSelector(store => store.auth.accessToken); 
+  const { connection } = useSignalR(`${import.meta.env.VITE_API_URL}/hubs/notification`, userAccessToken);
   const selectRoom = useSelector(state => state.admin.room);
   const dispatch = useDispatch();
   const { id } = useParams();  
@@ -19,27 +20,38 @@ function RoomDetail() {
     setCurrentPlayer({ ...currentPlayer, [name]: value });
   };
 
+
   const addPlayer = () => {
     if (!currentPlayer.usermail) return;
 
     async function AddParticipant() {
-        const participant = await participantsApiService.addParticipantFromApi(currentPlayer.usermail, id);
-        setRoomPlayers([...roomPlayers, participant]);
+        try {
+          const participant = await participantsApiService.addParticipantFromApi(currentPlayer.usermail, id);
+          connection?.invoke("SendMessage", currentPlayer.usermail , `Пригласил вас в ${selectRoom.name}`)
+          setRoomPlayers([...roomPlayers, participant]);
+        } catch (error) {
+          return;
+        } 
       }
           
       AddParticipant();
-    setCurrentPlayer({ id: null, usermail: '' });
+    setCurrentPlayer({ id: null, userMail: '' });
   };
 
- const deletePlayer = async (id) => {
+ const deletePlayer = async (item) => {
 
     async function DeleteCase() {
-        return await participantsApiService.deleteParticipantFromApi(id);  
+        try {
+          return await participantsApiService.deleteParticipantFromApi(item.id);  
+        } catch (error) {
+          return;
+        }
       }
 
     let result = await DeleteCase();
     if(result === true){
-      setRoomPlayers(roomPlayers.filter(item => item.id !== id));
+      connection?.invoke("SendMessage", item.userMail , `Вас исключили из ${selectRoom.name}`)
+      setRoomPlayers(roomPlayers.filter(item => item.id !== item.id));
     }
   };
 
@@ -93,7 +105,7 @@ function RoomDetail() {
                 </td>
                 <td>
                 <div className="button-group">
-                  <button className='button button-outline' onClick={() => deletePlayer(item.id)}> <i className="fas fa-trash fa-lg"></i></button> 
+                  <button className='button button-outline' onClick={() => deletePlayer(item)}> <i className="fas fa-trash fa-lg"></i></button> 
                 </div>
                 </td>
               </tr>

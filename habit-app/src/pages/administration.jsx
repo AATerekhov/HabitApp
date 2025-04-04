@@ -74,9 +74,9 @@ function Administration() {
   };
 
 
-  const handleStartRoomChange = async () => {
+  const handleStartRoomChange = async (id) => {
     async function StartRoom() {
-
+      setItems((prevItems) => prevItems.map(item => (item.id === id ? { ...item, isActive: true } : item)));
       }
           
     await StartRoom();
@@ -133,7 +133,7 @@ function Administration() {
                <div className="button-group">
                  <button className='button button-outline' onClick={() => editItem(item)}><i className="fa fa-pencil fa-lg"></i></button>
                  <button className='button button-outline' onClick={() => deleteItem(item.id)}> <i className="fas fa-trash fa-lg"></i></button>                 
-                {(!item.isActive) && (<button className='button button-outline' onClick={async () => await handleStartRoomChange()}> <i className="fa fa-gamepad fa-lg"></i></button>)} 
+                {(!item.isActive) && (<button className='button button-outline' onClick={async () => await handleStartRoomChange(item.id)}> <i className="fa fa-gamepad fa-lg"></i></button>)} 
                </div>
                </td>
              </tr>

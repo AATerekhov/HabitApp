@@ -29,7 +29,7 @@ function AdminHabits (){
   const handleUpdateItemChange = async (updateItem) => {
     async function UpdateCase(item) {
       item.roomId = selectRoom.id;
-      item.personId = selectRoom.manager.id;
+      item.personId = person.id;
       return await apiService.updateHabitFromApi(item);  
     }
 

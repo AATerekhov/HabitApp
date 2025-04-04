@@ -66,7 +66,7 @@ const Confirmations = () => {
         if (!connection) {
           return
         }
-        connection.on("AddParticipant", (message) => {   
+        const handleAddParticipant = (message) => {
           try {
             let newItem = JSON.parse(message);
             if (newItem && newItem.id && newItem.case) {
@@ -77,12 +77,31 @@ const Confirmations = () => {
         } catch (error) {
             console.error("Error parsing message:", error);
         }
-        });
+        };   
+
+        const handleDeleteParticipant = (message) => {
+          try {
+            let deletedItemId = message;
+            if (deletedItemId) {
+                setItems((prevItems) => prevItems.filter((item) =>
+                  item.id !== deletedItemId
+                ));
+            } else {
+                console.error("Received invalid participant data:", deletedItemId);
+            }
+        } catch (error) {
+            console.error("Error parsing message:", error);
+        }
+        }; 
+
+        connection.on("AddParticipant", handleAddParticipant);
+        connection.on("DeleteParticipant", handleDeleteParticipant);
       
         return () => {
           connection.off("AddParticipant")
+          connection.off("DeleteParticipant")
         }      
-      }, [connection])
+      }, [connection])       
 
     return (
         <div className="container"> 

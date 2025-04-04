@@ -5,10 +5,11 @@ import './cards.css';
 import CardCreate from './creaters/CardCreate';
 import CardUpdate from './updates/CardUpdate';
 import CardTable from './tables/CardTable';
+import CardView from '../pages/views/CardView';
 
 function Cards() {
   const [items, setItems] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(0);
   const [currentItem, setCurrentItem] = useState(null);
 
   const handleAddItemChange = async (newCard) => {
@@ -22,14 +23,14 @@ function Cards() {
   };
 
   const handleCansel = () => {
-    setIsEditing(false);
+    setIsEditing(0);
   };
   
   const editItem = async (item) => {
     try {      
       let detailItem = await apiService.getCardFoIdFromApi(item.id);
       
-      setIsEditing(true);
+      setIsEditing(1);
       setCurrentItem(detailItem);
     } catch (error) {
       return;
@@ -46,7 +47,7 @@ function Cards() {
         setItems(items.map(item => (item.id === currentItem.id ? currentItem : item)));
         setCurrentItem(null);
     }
-    setIsEditing(false);
+    setIsEditing(0);
   };
 
   const deleteItem = async (id) => {
@@ -59,6 +60,17 @@ function Cards() {
         setItems(items.filter(item => item.id !== id));
     }
   };  
+  
+      const showFullItem = async (cardId) => {
+        try {      
+          
+          let detailItem = await apiService.getCardFoIdFromApi(cardId);      
+          setCurrentItem(detailItem);
+          setIsEditing(2);
+        } catch (error) {
+          return;
+        }   
+      };
 
   useEffect(() => {
     async function getCards() {
@@ -72,9 +84,10 @@ function Cards() {
   return (
     <div className="container">
       <h2>Cards for administration 🎴🃏</h2>
-      {!isEditing && (<CardCreate onChangeAddItem={handleAddItemChange}/>) }   
-      {isEditing && (<CardUpdate initialElement={currentItem} onChangeUpdateItem={handleUpdateItemChange} onCansel={handleCansel}/>) } 
-      <CardTable  initialItems={items} onChangeEditItem={editItem} onChangeDeleteItem={deleteItem}/>
+      { (isEditing === 0) && (<CardCreate onChangeAddItem={handleAddItemChange}/>) }   
+      { (isEditing === 1) && (<CardUpdate initialElement={currentItem} onChangeUpdateItem={handleUpdateItemChange} onCansel={handleCansel}/>) }
+      { (isEditing === 2) && (<div className='shelf'> <CardView initialElement={currentItem} initialTitle={{name:currentItem.name, description: currentItem.description}}/></div>) } 
+      <CardTable  initialItems={items} onChangeEditItem={editItem} onChangeDeleteItem={deleteItem} onChengeShowItem={showFullItem} onChengeCansel={handleCansel}/>
     </div>
   )  
 }

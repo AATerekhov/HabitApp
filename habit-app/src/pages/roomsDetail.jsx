@@ -51,9 +51,39 @@ function RoomDetail() {
     let result = await DeleteCase();
     if(result === true){
       connection?.invoke("SendMessage", item.userMail , `Вас исключили из ${selectRoom.name}`)
-      setRoomPlayers(roomPlayers.filter(item => item.id !== item.id));
+      setRoomPlayers( (prevRoomPlayers) => prevRoomPlayers.filter((element) => 
+        element.id !== item.id));
     }
   };
+
+  useEffect(() => {
+        if (!connection) {
+          return
+        }
+
+        const handleCheckParticipant = (message) => {
+            try {
+              let updateItem = JSON.parse(message);
+              if (updateItem && updateItem.id) {
+                setRoomPlayers((prevRoomPlayers) =>
+                  prevRoomPlayers.map((item) =>
+                    item.id === updateItem.id ? updateItem : item
+                  )
+                );
+              } else {
+                console.error("Received invalid participant data:", updateItem);
+              }
+            } catch (error) {
+              console.error("Error parsing message:", error);
+            }
+          };          
+
+      connection.on("CheckParticipant", handleCheckParticipant);
+      
+        return () => {
+          connection.off("CheckParticipant")
+        }      
+  }, [connection])
 
   useEffect(() => {
     async function getRoom(id) {

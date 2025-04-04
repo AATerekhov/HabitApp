@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from 'react';
 
-const CardTable = ({  initialItems, onChangeEditItem, onChangeDeleteItem }) => {    
+const CardTable = ({  initialItems, onChangeEditItem, onChangeDeleteItem, onChengeShowItem, onChengeCansel}) => {    
   const [items, setItems] = useState(initialItems);
+  const [selectItemId, setSelectItemId] = useState(null);
 
   const editItem = async (item) => {
+    setSelectItemId(null);
     await onChangeEditItem(item);
   };
 
   const deleteItem = async (itemId) => {
+    setSelectItemId(null);
     await onChangeDeleteItem(itemId);
+  };
+
+  const handleShow = async (itemId) => {
+    setSelectItemId(itemId);
+    await onChengeShowItem(itemId);
+  };
+
+  const handleCloseShow =  () => {
+    setSelectItemId(null);
+    onChengeCansel();
   };
 
   useEffect(() => {
@@ -19,6 +32,7 @@ const CardTable = ({  initialItems, onChangeEditItem, onChangeDeleteItem }) => {
     <table className="u-full-width">
       <thead>
         <tr>
+          <th></th>
           <th>Name</th>
           <th>Description</th>
           <th>Actions</th>
@@ -32,7 +46,11 @@ const CardTable = ({  initialItems, onChangeEditItem, onChangeDeleteItem }) => {
             </td>
           </tr>
         ) : (items.map(item => (
-          <tr key={item.id}>
+          <tr key={item.id}>            
+            <td>
+                  {item.id !== selectItemId ?(<button className="button button-clear" onClick={async () => await handleShow(item.id)}><i className="fa fa-eye fa-lg"></i></button>)
+                  :(<button className="button button-clear" onClick={() => handleCloseShow()}><i className="fa fa-eye-slash fa-lg"></i></button>)}
+            </td>  
             <td> 
               {item.name}                
             </td>

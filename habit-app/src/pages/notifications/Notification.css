@@ -11,7 +11,7 @@
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
-    animation: fadeIn 0.5s, fadeOut 0.5s 3s forwards; /* Анимация появления и исчезновения */
+    animation: fadeIn 0.5s, fadeOut 0.5s 4s forwards; /* Анимация появления и исчезновения */
   }
   
   @keyframes fadeIn {

@@ -18,21 +18,14 @@ function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
-      <p>Hello, {user}</p>
-      <p>I have given you a token to call your favourite doughnut based API 🍩</p>
+      <h1>Habits tracker</h1>
+      <p>Привет, {user}</p>
+      <p>На платформе вы можете тренировать свои привычки 🏇</p>
+      <p>Для начала перейдите во вкладку Rooms 🏠</p>
 
-      <p>💡 <strong>Tip: </strong><em>Use the Redux dev tools and network tab to inspect what user data was returned from identity and stored in the client.</em></p>
+      <p>💡 <strong>Детали: </strong><em>Веб-сервис разработан в учебных целях для прохождения курса ASP.NET Core разработчик в OTUS🎓</em></p>
 
-      <button className="button button-outline" onClick={() => getDoughnuts()}>Get Doughnuts</button>
-      <button className="button button-clear" onClick={() => signOut()}>Sign Out</button>
-
-      <pre>
-        <code>
-          {prettifyJson(doughnutData ? doughnutData : 'No doughnuts yet :(')}
-        </code>
-      </pre>
-      <p><a target='_blank' rel='noopener noreferrer' href='https://github.com/tappyy/react-IS4-auth-demo'>Github Repo</a></p>
+      <p><a target='_blank' rel='noopener noreferrer' href='https://github.com/AATerekhov/OtusASPNET2024_08Team4'>Github Repo</a></p>
 
     </div>
   )  

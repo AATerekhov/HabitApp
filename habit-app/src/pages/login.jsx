@@ -16,14 +16,14 @@ function Login() {
       :
       (
         <div>
-          <h1>Hello!</h1>
-          <p>Welcome to We Want Doughnuts.</p>
-          <p>A demo of using React and Identity Server 4 to authenticate a user via OpenID Connect to gain access to a web API (and some lovely doughnuts).</p>
-          <p>Start by signing in.</p>
-          <p>💡 <strong>Tip: </strong><em>User: 'alice', Pass: 'alice'</em></p>
+          <h1>Привет!</h1>
+            <p>Добро пожалова на Habits tracker.</p>
+            <p>На платформе вы можете тренировать свои привычки 🏇</p>
+            <p>Для начала перейдите во вкладку Rooms 🏠</p>
+            <button onClick={() => login()}>Login</button>
+            <p>💡 <strong>Детали: </strong><em>Веб-сервис разработан в учебных целях для прохождения курса ASP.NET Core разработчик в OTUS🎓</em></p>
 
-          <button onClick={() => login()}>Login</button>
-          <p><a target='_blank' rel='noopener noreferrer' href='https://github.com/tappyy/react-IS4-auth-demo'>Github Repo</a></p>
+            <p><a target='_blank' rel='noopener noreferrer' href='https://github.com/AATerekhov/OtusASPNET2024_08Team4'>Github Repo</a></p>     
         </div>
       )
   )

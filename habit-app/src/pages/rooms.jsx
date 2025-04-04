@@ -30,7 +30,7 @@ const Rooms = () => {
           </li>
         </ul>
       </nav>      
-      <Outlet />
+      <Outlet />      
     </div>
   );
 };

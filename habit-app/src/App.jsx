@@ -5,7 +5,7 @@ import SignoutOidc from './pages/signout-oidc'
 import Home from './pages/home'
 import Login from './pages/login'
 import { Provider } from 'react-redux';
-import store from './app/store';
+import store from './app/Store';
 import userManager from './services/userService'
 import AuthProvider from './utils/authProvider'
 import NotFound from "./components/NotFound";

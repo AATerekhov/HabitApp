@@ -1,0 +1,7 @@
+services:
+  client-habit-app:
+    build:
+      context: ./habit-app
+    container_name: client-habit-app
+    ports:
+      - "3000:80" # Порт для React приложения

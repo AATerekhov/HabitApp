@@ -1,0 +1,16 @@
+services:
+  server-hw-eleven:
+    build:
+      context: ./ServerHost
+    container_name: server-hw-eleven
+    environment:
+      "ASPNETCORE_URLS": "http://+:8080"
+    ports:
+      - "5015:8080" # Порт для ASP.NET Core приложения
+
+  client-hw-eleven:
+    build:
+      context: ./ClientHost
+    container_name: client-hw-eleven
+    ports:
+      - "3000:80" # Порт для React приложения
